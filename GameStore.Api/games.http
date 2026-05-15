@@ -29,3 +29,6 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:5281/games/2
+
+### Genre EndPoints
+GET http://localhost:5281/genres

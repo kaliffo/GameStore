@@ -8,11 +8,6 @@ namespace GameStore.EndPoints;
 public static class GamesEndPoints
 {
 const string GetGameEndpointName = "GetName";
-private static readonly List<GameSummaryDto> games = [
-    new GameSummaryDto(1, "The Legend of Zelda: Breath of the Wild", "Action-adventure", 59.99m, new DateOnly(2017, 3, 3)),
-    new GameSummaryDto(2, "Red Dead Redemption 2", "Action-adventure", 59.99m, new DateOnly(2018, 10, 26)),
-    new GameSummaryDto(3, "The Witcher 3: Wild Hunt", "Action RPG", 39.99m, new DateOnly(2015, 5, 19)),
-];
 
 public static void MapGamesEndPoints(this WebApplication app)
     {
