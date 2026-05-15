@@ -1,101 +1,101 @@
-# 🎮 GameStore API
+# 🎮 GameStore
 
-Eine einfache REST API zum Verwalten von Videospielen, erstellt mit ASP.NET Core Minimal API.
-Dieses Projekt dient als Lernprojekt für CRUD-Operationen und RESTful Web APIs.
+A full-stack game store application built with **ASP.NET Core** (REST API) and **React + TypeScript** (Frontend), using **SQLite** as database.
 
-## 🚀 Features
+---
 
-* GET alle Spiele
-* GET Spiel nach ID
-* POST neues Spiel hinzufügen
-* PUT Spiel aktualisieren
-* DELETE Spiel löschen
-* Verwendung von DTOs
-* Minimal API in ASP.NET Core
+## 📁 Project Structure
 
-## 🛠️ Technologien
+```
+GameStore/
+├── GameStore.Api/                  # ASP.NET Core Web API
+│   ├── Data/                       # DB Context & Migrations
+│   ├── Dtos/                       # Data Transfer Objects
+│   ├── EndPoints/                  # Minimal API Endpoints
+│   ├── Models/                     # Entity Models
+│   ├── Properties/
+│   │   └── launchSettings.json
+│   ├── appsettings.json
+│   ├── appsettings.Development.json
+│   ├── GameStore.db                # SQLite Database
+│   └── Program.cs
+│
+└── GameStore.React/                # React + TypeScript Frontend (Vite)
+    ├── src/                        # React source files
+    ├── public/
+    ├── index.html
+    ├── vite.config.ts
+    ├── tsconfig.json
+    └── package.json
+```
 
-* .NET 8
-* ASP.NET Core Minimal API
-* C#
-* REST API
-* DTO Pattern
+---
 
-## ▶️ Projekt starten
+## 🚀 Getting Started
+
+### Prerequisites
+
+- [.NET 8 SDK](https://dotnet.microsoft.com/download)
+- [Node.js 18+](https://nodejs.org/)
+- [npm](https://www.npmjs.com/)
+
+---
+
+### Backend (ASP.NET Core API)
 
 ```bash
+cd GameStore.Api
+dotnet restore
 dotnet run
 ```
 
-Danach läuft die API unter:
+The API will be available at `https://localhost:7000`  
+*(check `Properties/launchSettings.json` for the exact port)*
 
-```
-http://localhost:5281
-```
+---
 
-## 📡 API Endpoints
+### Frontend (React + Vite)
 
-### GET alle Spiele
-
-```
-GET /games
-```
-
-### GET Spiel nach ID
-
-```
-GET /games/{id}
+```bash
+cd GameStore.React
+npm install
+npm run dev
 ```
 
-### Neues Spiel erstellen
+The frontend will be available at `http://localhost:5173`.
 
-```
-POST /games
-```
+> All `/api/*` requests are automatically proxied to the ASP.NET Core backend via Vite's proxy config.
 
-Beispiel Body:
+---
 
-```json
-{
-  "name": "Cyberpunk 2077",
-  "gender": "RPG",
-  "price": 49.99,
-  "releaseDate": "2020-12-10"
+## 🔧 Configuration
+
+### Vite Proxy (`GameStore.React/vite.config.ts`)
+
+```ts
+server: {
+  proxy: {
+    '/api': {
+      target: 'https://localhost:7000', // your ASP.NET port
+      changeOrigin: true,
+      secure: false,
+    }
+  }
 }
 ```
 
-### Spiel aktualisieren
+---
 
-```
-PUT /games/{id}
-```
+## 🛠️ Tech Stack
 
-### Spiel löschen
+| Layer     | Technology                        |
+|-----------|-----------------------------------|
+| Backend   | ASP.NET Core 8, C#, Minimal APIs |
+| Frontend  | React 18, TypeScript, Vite        |
+| Database  | SQLite (via Entity Framework Core)|
 
-```
-DELETE /games/{id}
-```
+---
 
-## 📂 Projektstruktur
+## 📜 License
 
-```
-GameStore.Api
-│
-├── Dtos
-│   ├── GameDto.cs
-│   ├── CreateGameDto.cs
-│   └── UpdateGameDto.cs
-│
-└── Program.cs
-```
-
-## 🎯 Lernziele
-
-* REST API verstehen
-* CRUD Operationen implementieren
-* DTO Pattern anwenden
-* Minimal API verwenden
-
-## 📄 License
-
-MIT License
+MIT

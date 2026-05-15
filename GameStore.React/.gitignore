@@ -1,24 +1,82 @@
-# Logs
-logs
-*.log
+# ========================
+# ASP.NET Core / .NET
+# ========================
+bin/
+obj/
+*.user
+*.suo
+.vs/
+.idea/
+*.rsuser
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+artifacts/
+
+# ========================
+# SQLite Database
+# ========================
+*.db
+*.db-shm
+*.db-wal
+
+# ========================
+# Environment & Secrets
+# ========================
+.env
+.env.local
+appsettings.Development.json
+appsettings.Local.json
+secrets.json
+
+# ========================
+# React / Node (Vite)
+# ========================
+node_modules/
+dist/
+dist-ssr/
+.vite/
+*.local
+
+# npm logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# ========================
+# IDEs & Editors
+# ========================
 
-# Editor directories and files
+# Visual Studio
+.vs/
+*.VC.db
+
+# Visual Studio Code
 .vscode/*
 !.vscode/extensions.json
-.idea
+!.vscode/settings.json
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# lscache
+*.lscache
+
+# ========================
+# OS
+# ========================
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+Thumbs.db
+Desktop.ini
+
+# ========================
+# Misc
+# ========================
+*.log
+*.cache
+coverage/
