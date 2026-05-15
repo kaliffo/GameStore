@@ -69,27 +69,32 @@ group.MapPost("/", async (CreateGameDto newGame, GameStoreContext dbContext) =>
 });
 
 // PUT /games/{id}
-group.MapPut("/{id}", (int id, UpdateGameDto updatedGame) =>
+group.MapPut("/{id}", async (int id, UpdateGameDto updatedGame, GameStoreContext dbContext) =>
 {
-    var Index = games.FindIndex(game => game.Id == id);
-    if (Index == -1)
+    var exsitingGame = await dbContext.Games.FindAsync(id);
+    if (exsitingGame is null)
     {
         return Results.NotFound();
     }
-    games[Index] = new GameSummaryDto(
-        id,
-        updatedGame.Name,
-        updatedGame.Gender, 
-        updatedGame.Price,
-        updatedGame.ReleaseDate 
-    );
+    exsitingGame.Name = updatedGame.Name;
+    exsitingGame.GenreId = updatedGame.GenreId;
+    exsitingGame.Price = updatedGame.Price;
+    exsitingGame.ReleaseDate = updatedGame.ReleaseDate;
+
+    await dbContext.SaveChangesAsync();
     return Results.NoContent();
 });
-
-// DELETE /games/{id}
-group.MapDelete("/{id}", (int id) =>
+    
+    // DELETE /games/{id}
+group.MapDelete("/{id}", async (int id, GameStoreContext dbContext) =>
 {
-    games.RemoveAll(game => game.Id == id);
+    var gameToDelete = dbContext.Games.Find(id);
+    if (gameToDelete is null)
+    {
+        return Results.NotFound();
+    }
+    dbContext.Games.Remove(gameToDelete);
+    await dbContext.SaveChangesAsync();
     return Results.NoContent();
 });   
     }
