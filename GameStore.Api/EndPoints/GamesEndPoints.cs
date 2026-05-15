@@ -88,13 +88,7 @@ group.MapPut("/{id}", async (int id, UpdateGameDto updatedGame, GameStoreContext
     // DELETE /games/{id}
 group.MapDelete("/{id}", async (int id, GameStoreContext dbContext) =>
 {
-    var gameToDelete = dbContext.Games.Find(id);
-    if (gameToDelete is null)
-    {
-        return Results.NotFound();
-    }
-    dbContext.Games.Remove(gameToDelete);
-    await dbContext.SaveChangesAsync();
+    await dbContext.Games.Where(game =>game.Id == id).ExecuteDeleteAsync();
     return Results.NoContent();
 });   
     }
